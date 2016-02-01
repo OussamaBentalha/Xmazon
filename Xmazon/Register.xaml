@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Xmazon.Register" Title="Register">
+	<ContentPage.Content>
+		<StackLayout VerticalOptions="StartAndExpand">
+			<Label Text="Username" />
+			<Entry x:Name="usernameEntry" Placeholder="username" />
+			<Label Text="Firstname" />
+			<Entry x:Name="firstnameEntry" Placeholder="firstname" />
+			<Label Text="Email" />
+			<Entry x:Name="emailnameEntry" Placeholder="email" />
+			<Label Text="Password" />
+			<Entry x:Name="passwordEntry" IsPassword="true" />
+			<Button Text="Subscribe" Clicked="OnSubscibeButtonClicked"  />
+			<Label x:Name="messageLabel" />
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

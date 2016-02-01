@@ -15,7 +15,7 @@ namespace Xmazon
 
 		async void OnSignUpButtonClicked (object sender, EventArgs e)
 		{
-			await Navigation.PushAsync (null);
+			await Navigation.PushAsync (new Register());
 		}
 
 		async void OnLoginButtonClicked (object sender, EventArgs e)
