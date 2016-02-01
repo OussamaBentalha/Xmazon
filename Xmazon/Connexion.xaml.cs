@@ -15,6 +15,7 @@ namespace Xmazon
 
 		async void OnSignUpButtonClicked (object sender, EventArgs e)
 		{
+			//TODO launch Register()
 			await Navigation.PushAsync (null);
 		}
 
