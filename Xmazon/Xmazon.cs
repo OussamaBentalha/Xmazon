@@ -26,6 +26,9 @@ namespace Xmazon
 		{
 			// Handle when your app resumes
 		}
+
+		public void connect(){
+		}
 	}
 }
 
