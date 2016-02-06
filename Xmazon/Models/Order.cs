@@ -2,15 +2,15 @@
 
 namespace Xmazon
 {
-	public class Category
+	public class Order
 	{
-		public Category ()
+		public Order ()
 		{
 		}
 
 		public string Uid { get; set; }
 
-		public string Name { get; set; }
+		public Array Product_Cart { get; set; }
 	}
 }
 

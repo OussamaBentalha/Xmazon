@@ -4,6 +4,10 @@ namespace Xmazon
 {
 	public class Product
 	{
+		public Product ()
+		{
+		}
+
 		public string Uid { get; set; }
 
 		public string Name { get; set; }
