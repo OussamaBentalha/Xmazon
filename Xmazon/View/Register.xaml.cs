@@ -29,6 +29,11 @@ namespace Xmazon
 			if (signUpSucceeded) {
 				var rootPage = Navigation.NavigationStack [0];
 				if (rootPage != null) {
+					/*
+			 		* 
+			 		* Webservice d'inscription
+					* 
+			 		*/ 
 					Mockups.user = user;
 					App.IsUserLoggedIn = true;
 					Navigation.InsertPageBefore (new ListStores (), Navigation.NavigationStack [0]);

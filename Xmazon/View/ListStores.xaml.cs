@@ -10,10 +10,16 @@ namespace Xmazon
 		public ListStores ()
 		{
 			InitializeComponent ();
+			lstView.ItemsSource = Mockups.stores;
 		}
 
 		async void OnLogoutButtonClicked (object sender, EventArgs e)
 		{
+			/*
+			 * 
+			 * Webservice de déconnexion
+			 * 
+			 */ 
 			App.IsUserLoggedIn = false;
 			Navigation.InsertPageBefore (new Connexion (), this);
 			await Navigation.PopAsync ();
