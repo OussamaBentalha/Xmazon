@@ -10,17 +10,43 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Xmazon.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Connexion.xaml.cs">
+    <Compile Include="$(MSBuildThisFileDirectory)Model\User.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Product.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Category.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Store.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Cart.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Order.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Mockups.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)View\Connexion.xaml.cs">
       <DependentUpon>Connexion.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Models\User.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)View\ListStores.xaml.cs">
+      <DependentUpon>ListStores.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\Register.xaml.cs">
+      <DependentUpon>Register.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\ListViewXaml.xaml.cs">
+      <DependentUpon>ListViewXaml.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Connexion.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\Connexion.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\ListStores.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\Register.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)View\ListViewXaml.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Models\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Services\" />
+    <Folder Include="$(MSBuildThisFileDirectory)View\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Model\" />
   </ItemGroup>
 </Project>

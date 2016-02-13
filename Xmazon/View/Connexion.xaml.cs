@@ -9,37 +9,44 @@ namespace Xmazon
 	{
 		public Connexion ()
 		{
-			this.Title = "Connexion";
 			InitializeComponent ();
 		}
 
 		async void OnSignUpButtonClicked (object sender, EventArgs e)
 		{
-			await Navigation.PushAsync (null);
+			//TODO launch Register()
+			await Navigation.PushAsync (new Register());
 		}
 
 		async void OnLoginButtonClicked (object sender, EventArgs e)
 		{
+			
 			var user = new User {
 				Username = usernameEntry.Text,
 				Password = passwordEntry.Text
 			};
 
-			/*var isValid = AreCredentialsCorrect (user);
+			var isValid = AreCredentialsCorrect (user);
 			if (isValid) {
 				App.IsUserLoggedIn = true;
-				Navigation.InsertPageBefore (new MainPage (), this);
+				Navigation.InsertPageBefore (new ListStores (), this);
 				await Navigation.PopAsync ();
 			} else {
 				messageLabel.Text = "Login failed";
 				passwordEntry.Text = string.Empty;
-			}*/
+			}
 		}
 
 		bool AreCredentialsCorrect (User user)
 		{
-			//return user.Username == Constants.Username && user.Password == Constants.Password;
-			return true;
+			/*
+			 * 
+			 * Webservice de connexion
+			 * 
+			 */ 
+			return true; 
+			//if(Mockups.user != null) return user.Username == Mockups.user.Username && user.Password == Mockups.user.Password;
+			//return false;
 		}
 			
 	}

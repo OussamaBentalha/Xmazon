@@ -6,8 +6,15 @@ namespace Xmazon
 {
 	public class App : Application
 	{
+		public static bool IsUserLoggedIn { get; set; }
+
 		public App ()
 		{
+			if (!IsUserLoggedIn) {
+				//MainPage = new NavigationPage (new LoginPage ());
+			} else {
+				//MainPage = new NavigationPage (new LoginNavigation.MainPage ());
+			}
 			// The root page of your application
 			MainPage = new NavigationPage(new Connexion());
 		}
