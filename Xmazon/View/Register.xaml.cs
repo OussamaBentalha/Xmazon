@@ -7,8 +7,6 @@ namespace Xmazon
 {
 	public partial class Register : ContentPage
 	{
-		//Entry usernameEntry, passwordEntry, emailEntry;
-		//Label messageLabel;
 
 		public Register ()
 		{	
@@ -20,19 +18,19 @@ namespace Xmazon
 			var user = new User () {
 				Username = usernameEntry.Text,
 				Password = passwordEntry.Text,
-				Email = emailEntry.Text
+				Email = emailEntry.Text,
+				Firstname = firstnameEntry.Text,
+				Lastname = LastnameEntry.Text,
+				Birthdate = birthdayEntry.Text
 			};
 
-			// Sign up logic goes here
 
 			var signUpSucceeded = AreDetailsValid (user);
 			if (signUpSucceeded) {
-				messageLabel.Text = "Sign up successed";
 				var rootPage = Navigation.NavigationStack [0];
-				//var rootPage = Navigation.NavigationStack.FirstOrDefault ();
 				if (rootPage != null) {
+					Mockups.user = user;
 					App.IsUserLoggedIn = true;
-					//Navigation.InsertPageBefore (new ListStores (), Navigation.NavigationStack.First ());
 					Navigation.InsertPageBefore (new ListStores (), Navigation.NavigationStack [0]);
 					await Navigation.PopToRootAsync ();
 				}

@@ -8,6 +8,13 @@
 			<Entry x:Name="passwordEntry" IsPassword="true" />
 			<Label Text="Email address" />
 			<Entry x:Name="emailEntry" />
+			<Label Text="Firstname" />
+			<Entry x:Name="firstnameEntry" Placeholder="firstname" />
+			<Label Text="Lastname" />
+			<Entry x:Name="LastnameEntry" Placeholder="Lastname" />
+			<Label Text="Birthday" />
+			<Entry x:Name="birthdayEntry" Placeholder="birthday" />
+
 			<Button Text="Sign Up" Clicked="OnSignUpButtonClicked" />
 			<Label x:Name="messageLabel" />
 		</StackLayout>

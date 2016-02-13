@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Xmazon
 {
@@ -10,7 +11,7 @@ namespace Xmazon
 
 		public string Uid { get; set; }
 
-		public Array Product_Cart { get; set; }
+		public List<Product> Product_Cart { get; set; }
 	}
 }
 

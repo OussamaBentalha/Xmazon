@@ -29,7 +29,7 @@ namespace Xmazon
 			var isValid = AreCredentialsCorrect (user);
 			if (isValid) {
 				App.IsUserLoggedIn = true;
-				Navigation.InsertPageBefore (new ListStores (), this);
+				Navigation.InsertPageBefore (new ListViewXaml (), this);
 				await Navigation.PopAsync ();
 			} else {
 				messageLabel.Text = "Login failed";
@@ -39,8 +39,9 @@ namespace Xmazon
 
 		bool AreCredentialsCorrect (User user)
 		{
-			return user.Username == Mockups.user.Username && user.Password == Mockups.user.Password;
-			//return true;
+			return true;
+			//if(Mockups.user != null) return user.Username == Mockups.user.Username && user.Password == Mockups.user.Password;
+			//return false;
 		}
 			
 	}

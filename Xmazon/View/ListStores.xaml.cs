@@ -11,6 +11,13 @@ namespace Xmazon
 		{
 			InitializeComponent ();
 		}
+
+		async void OnLogoutButtonClicked (object sender, EventArgs e)
+		{
+			App.IsUserLoggedIn = false;
+			Navigation.InsertPageBefore (new Connexion (), this);
+			await Navigation.PopAsync ();
+		}
 	}
 }
 
