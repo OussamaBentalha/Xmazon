@@ -35,11 +35,6 @@ namespace Xmazon
 			var requestResult = await requestObject.Call (url, method, null, postParams, headers);
 
 			if (requestResult.ContainsKey ("result")) {
-				Console.Write ("ok");
-			}
-		
-			var signUpSucceeded = true; //AreDetailsValid (user);
-			if (signUpSucceeded) {
 				var rootPage = Navigation.NavigationStack [0];
 				if (rootPage != null) {
 					/*
@@ -47,12 +42,13 @@ namespace Xmazon
 			 		* Webservice d'inscription
 					* 
 			 		*/ 
-				//	Mockups.user = user;
+					//	Mockups.user = user;
 					//App.IsUserLoggedIn = true;
 					Navigation.InsertPageBefore (new ListStores (), Navigation.NavigationStack [0]);
 					await Navigation.PopToRootAsync ();
 				}
-			} else {
+			}
+			else {
 				messageLabel.Text = "Sign up failed";
 			}
 		}
