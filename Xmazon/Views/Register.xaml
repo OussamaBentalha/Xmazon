@@ -11,7 +11,7 @@
 			<Label Text="Firstname" />
 			<Entry x:Name="firstnameEntry" Placeholder="firstname" />
 			<Label Text="Lastname" />
-			<Entry x:Name="LastnameEntry" Placeholder="Lastname" />
+			<Entry x:Name="lastnameEntry" Placeholder="lastname" />
 			<Label Text="Birthday" />
 			<Entry x:Name="birthdayEntry" Placeholder="birthday" />
 

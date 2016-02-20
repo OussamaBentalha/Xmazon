@@ -15,17 +15,30 @@ namespace Xmazon
 
 		async void OnSignUpButtonClicked (object sender, EventArgs e)
 		{
-			var user = new User () {
-				Username = usernameEntry.Text,
-				Password = passwordEntry.Text,
-				Email = emailEntry.Text,
-				Firstname = firstnameEntry.Text,
-				Lastname = LastnameEntry.Text,
-				Birthdate = birthdayEntry.Text
-			};
+
+			string url = XmazonRequest.AUTH_SUBSCRIBE;
+			var method = XmazonRequest.Method.POST;
+
+			var requestObject = new XmazonRequest ();
+
+			var headers = new Dictionary<string, string> ();
+			headers.Add ("Authorization", "Bearer " + AppContext.AccessToken);
 
 
-			var signUpSucceeded = AreDetailsValid (user);
+			var postParams = new Dictionary<string, string> ();
+			postParams.Add ("username", usernameEntry.Text);
+			postParams.Add ("password", passwordEntry.Text);
+			postParams.Add ("email", emailEntry.Text);
+			postParams.Add ("firstname", firstnameEntry.Text);
+			postParams.Add ("lastname", lastnameEntry.Text);
+
+			var requestResult = await requestObject.Call (url, method, null, postParams, headers);
+
+			if (requestResult.ContainsKey ("result")) {
+				Console.Write ("ok");
+			}
+		
+			var signUpSucceeded = true; //AreDetailsValid (user);
 			if (signUpSucceeded) {
 				var rootPage = Navigation.NavigationStack [0];
 				if (rootPage != null) {
@@ -34,7 +47,7 @@ namespace Xmazon
 			 		* Webservice d'inscription
 					* 
 			 		*/ 
-					Mockups.user = user;
+				//	Mockups.user = user;
 					//App.IsUserLoggedIn = true;
 					Navigation.InsertPageBefore (new ListStores (), Navigation.NavigationStack [0]);
 					await Navigation.PopToRootAsync ();
