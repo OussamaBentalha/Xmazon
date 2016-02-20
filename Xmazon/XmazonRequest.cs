@@ -94,16 +94,13 @@ namespace Xmazon
 			return null;
 		}
 
-		/**
-		 * Encode les paramètres GET (dans l'url)
-		 */
+
 		private string GetUrlEncoded(string url, Dictionary<string, string> getParams)
 		{
 			if (getParams == null) {
 				return url;
 			}
-
-			// Encode chaque paramètre au format "&key=value"
+				
 			string getParamsEncoded = string.Join(
 				"&", 
 				getParams.Select(param => { 
@@ -114,9 +111,7 @@ namespace Xmazon
 			return url + (string.IsNullOrEmpty(getParamsEncoded) ? "" : "?" + getParamsEncoded);
 		}
 
-		/**
-		 * Retourne le corps (body) encodé de la requête à partir des paramètres POST
-		 */
+
 		private FormUrlEncodedContent GetUrlEncodedBody(Dictionary<string, string> postParams) 
 		{
 			if (postParams == null) {
@@ -126,9 +121,7 @@ namespace Xmazon
 			return new FormUrlEncodedContent (postParams);
 		}
 
-		/**
-		 * Rempli les headers de la requête avec le dictionnaire donné.
-		 */
+
 		private void SetHeaders(Dictionary<string, string> headers)
 		{
 			if (headers == null) {

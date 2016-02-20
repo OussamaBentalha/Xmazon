@@ -12,8 +12,8 @@ namespace Xmazon
 		public const string ACCESS_TOKEN = "access_token";
 		public const string REFRESH_TOKEN = "refresh_token";
 
-		public const string CLIENT_ID = "c2e1116c-182e-4fda-83ba-7fc17c61f81d";
-		public const string CLIENT_SECRET = "48793a268ed2ca79031b31e3cab2d104193b1945";
+		public const string CLIENT_ID = "f192b003-0e1e-4375-a0d6-62dcb86a6805";
+		public const string CLIENT_SECRET = "d482fa79ec5bac32b8dbb3f62aa083a08e2aaf28";
 
 		public static Dictionary<string, object> Properties {
 			get {

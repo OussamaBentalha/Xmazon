@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Json;
 using Xamarin.Forms;
 
 namespace Xmazon
@@ -10,7 +10,9 @@ namespace Xmazon
 		public Connexion ()
 		{
 			InitializeComponent();
-		}
+			usernameEntry.Text = "seb7@gmail.com";
+			passwordEntry.Text = "sebibi";
+		}	
 
 		async void OnSignUpButtonClicked (object sender, EventArgs e)
 		{
@@ -20,20 +22,16 @@ namespace Xmazon
 
 		async void OnLoginButtonClicked (object sender, EventArgs e)
 		{
-
-			var user = new User {
-				Username = usernameEntry.Text,
-				Password = passwordEntry.Text
-			};
-
-			var isValid = AreCredentialsCorrect (user);
-			if (isValid) {
-				//	App.IsUserLoggedIn = true;
+			
+			var result = await UserContext.Authenticate (usernameEntry.Text, passwordEntry.Text);
+			if (result != null){
+				Console.WriteLine ("Connexion reussie : " + result["access_token"]);
 				Navigation.InsertPageBefore (new ListStores (), this);
 				await Navigation.PopAsync ();
+				
 			} else {
-				messageLabel.Text = "Login failed";
-				passwordEntry.Text = string.Empty;
+				Console.WriteLine ("Echec");
+				messageLabel.Text = "Erreur de connexion";
 			}
 		}
 
