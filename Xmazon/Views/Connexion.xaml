@@ -1,16 +1,18 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Xmazon.Connexion" Title="Connexion">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Xmazon.Connexion" Title="Connexion" BackgroundColor="#428bca">
 	<ContentPage.ToolbarItems>
 		<ToolbarItem Text="Sign Up" Clicked="OnSignUpButtonClicked" />
 	</ContentPage.ToolbarItems>
 	<ContentPage.Content>
-		<StackLayout VerticalOptions="StartAndExpand">
-			<Label Text="Username" />
+		<StackLayout VerticalOptions="StartAndExpand"  Padding="50" >
+			<Label Text="Xmazon" TextColor="White" FontSize="35" XAlign="Center"/>
+			<Label Text="Username" TextColor="White"/>
 			<Entry x:Name="usernameEntry" Placeholder="username" />
-			<Label Text="Password" />
+			<Label Text="Password" TextColor="White"/>
 			<Entry x:Name="passwordEntry" IsPassword="true" />
-			<Button Text="Login" Clicked="OnLoginButtonClicked" />
-			<Label x:Name="messageLabel" />
+			<Label x:Name="messageLabel" TextColor="White" Font="15"/>
+			<Button Text="Login" Clicked="OnLoginButtonClicked" BackgroundColor="White" BorderRadius="22" />
+
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

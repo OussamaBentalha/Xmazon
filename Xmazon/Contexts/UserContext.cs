@@ -46,11 +46,14 @@ namespace Xmazon
 			JsonValue jsonToken = await xmazon.Call (
 				XmazonRequest.OAUTH_TOKEN, XmazonRequest.Method.POST, 
 				null, postParameters, null);
-
-			Properties [ACCESS_TOKEN] = (string) jsonToken [ACCESS_TOKEN];
-			Properties [REFRESH_TOKEN] = (string) jsonToken [REFRESH_TOKEN];
-
-			return jsonToken;
+			if (jsonToken != null) {
+				Properties [ACCESS_TOKEN] = (string)jsonToken [ACCESS_TOKEN];
+				Properties [REFRESH_TOKEN] = (string)jsonToken [REFRESH_TOKEN];
+				return jsonToken;
+			}
+			else {
+				return null;
+			}
 		}
 
 		public static async Task<JsonValue> RefreshToken()

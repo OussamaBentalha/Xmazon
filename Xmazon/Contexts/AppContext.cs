@@ -50,11 +50,10 @@ namespace Xmazon
 				postParameters.Add ("grant_type", "client_credentials");
 			}
 
-			JsonValue response = await xmazon.Call (
-				XmazonRequest.OAUTH_TOKEN, XmazonRequest.Method.POST,
+			JsonValue response = await xmazon.Call (XmazonRequest.OAUTH_TOKEN, XmazonRequest.Method.POST,
 				null, postParameters, null);
 
-			if (response.ContainsKey("code")
+			if (response==null || response.ContainsKey("code")
 				&& (int) response ["code"] >= 400
 				&& (int) response ["code"] < 500) {
 				Properties.Remove (ACCESS_TOKEN);

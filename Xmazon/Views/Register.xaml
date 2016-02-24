@@ -1,22 +1,22 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Xmazon.Register" Title="Sign Up">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Xmazon.Register" Title="Sign Up" BackgroundColor="#428bca">
 	<ContentPage.Content>
-		<StackLayout VerticalOptions="StartAndExpand">
-			<Label Text="Username" />
-			<Entry x:Name="usernameEntry" Placeholder="username" />
-			<Label Text="Password" />
+		<StackLayout VerticalOptions="StartAndExpand" Padding="50">
+			<Label Text="Username" TextColor="White"/>
+			<Entry x:Name="usernameEntry"/>
+			<Label Text="Password" TextColor="White"/>
 			<Entry x:Name="passwordEntry" IsPassword="true" />
-			<Label Text="Email address" />
-			<Entry x:Name="emailEntry" />
-			<Label Text="Firstname" />
-			<Entry x:Name="firstnameEntry" Placeholder="firstname" />
-			<Label Text="Lastname" />
-			<Entry x:Name="lastnameEntry" Placeholder="lastname" />
-			<Label Text="Birthday" />
-			<Entry x:Name="birthdayEntry" Placeholder="birthday" />
-
-			<Button Text="Sign Up" Clicked="OnSignUpButtonClicked" />
+			<Label Text="Email address" TextColor="White"/>
+			<Entry x:Name="emailEntry"/>
+			<Label Text="Firstname" TextColor="White"/>
+			<Entry x:Name="firstnameEntry" />
+			<Label Text="Lastname" TextColor="White"/>
+			<Entry x:Name="lastnameEntry"/>
+			<Label Text="Birthday" TextColor="White"/>
+			<Entry x:Name="birthdayEntry" Placeholder="dd/mm/yyy"/>
 			<Label x:Name="messageLabel" />
+			<Button Text="Sign Up" Clicked="OnSignUpButtonClicked" BackgroundColor="White" BorderRadius="22" />
+
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

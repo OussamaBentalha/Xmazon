@@ -42,12 +42,9 @@ namespace Xmazon
 					categoriesList.Add(currentCategory);
 				}
 				lstView.ItemsSource = categoriesList;
-				lstView.ItemTemplate = new DataTemplate(typeof(TextCell));
-				lstView.ItemTemplate.SetBinding(TextCell.TextProperty, "name");
 				lstView.ItemSelected += async (sender, e) => {
 					Category selectedCategory = (Category)e.SelectedItem;
-					Navigation.InsertPageBefore (new ListProducts(selectedCategory), this);
-					await Navigation.PopAsync ();
+					Navigation.PushAsync (new ListProducts(selectedCategory));
 				};
 			}
 		}

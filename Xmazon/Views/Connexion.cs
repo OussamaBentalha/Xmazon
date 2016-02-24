@@ -11,7 +11,7 @@ namespace Xmazon
 		{
 			InitializeComponent();
 			usernameEntry.Text = "seb7@gmail.com";
-			passwordEntry.Text = "sebibi";
+			passwordEntry.Text = "";
 		}	
 
 		async void OnSignUpButtonClicked (object sender, EventArgs e)
@@ -26,12 +26,13 @@ namespace Xmazon
 			var result = await UserContext.Authenticate (usernameEntry.Text, passwordEntry.Text);
 			if (result != null){
 				Console.WriteLine ("Connexion reussie : " + result["access_token"]);
-				Navigation.InsertPageBefore (new ListStores (), this);
-				await Navigation.PopAsync ();
+				messageLabel.Text = "";
+				passwordEntry.Text = "";
+				Navigation.PushAsync (new ListStores ());
 				
 			} else {
-				Console.WriteLine ("Echec");
-				messageLabel.Text = "Erreur de connexion";
+				passwordEntry.Text = "";
+				messageLabel.Text = "Pseudo/mot de passe incorrect.";
 			}
 		}
 

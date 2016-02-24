@@ -34,12 +34,9 @@ namespace Xmazon
 					storesList.Add(currentStore);
 				}
 				lstView.ItemsSource = storesList;
-				lstView.ItemTemplate = new DataTemplate(typeof(TextCell));
-				lstView.ItemTemplate.SetBinding(TextCell.TextProperty, "name");
 				lstView.ItemSelected += async (sender, e) => {
 					Store selectedStore = (Store)e.SelectedItem;
-					Navigation.InsertPageBefore (new ListCategories(selectedStore), this);
-					await Navigation.PopAsync ();
+					Navigation.PushAsync (new ListCategories(selectedStore));
 				};
 			}
 		}

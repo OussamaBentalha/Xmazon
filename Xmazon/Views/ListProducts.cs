@@ -26,7 +26,7 @@ namespace Xmazon
 			var requestObject = new XmazonRequest ();
 
 			var headers = new Dictionary<string, string> ();
-			headers.Add ("Authorization", "Bearer " + AppContext.AccessToken);
+			headers.Add ("Authorization", "Bearer " + UserContext.AccessToken);
 
 
 			var getParams = new Dictionary<string, string> ();
@@ -41,8 +41,6 @@ namespace Xmazon
 					productsList.Add(currentProduct);
 				}
 				lstView.ItemsSource = productsList;
-				lstView.ItemTemplate = new DataTemplate(typeof(TextCell));
-
 			}
 		}
 
@@ -56,7 +54,6 @@ namespace Xmazon
 			 */ 
 			//App.IsUserLoggedIn = false;
 			Navigation.InsertPageBefore (new Connexion (), this);
-			await Navigation.PopAsync ();
 		}
 	}
 }

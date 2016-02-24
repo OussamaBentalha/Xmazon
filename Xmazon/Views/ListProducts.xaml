@@ -1,9 +1,26 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Xmazon.ListProducts" Title="Products">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Xmazon.ListProducts" Title="Products" BackgroundColor="#428bca">
 	<ContentPage.ToolbarItems>
 		<ToolbarItem Text="Logout" Clicked="OnLogoutButtonClicked" />
 	</ContentPage.ToolbarItems>
 	<ContentPage.Content>
-		<ListView x:Name = "lstView" />
+		<ListView  x:Name="lstView" BackgroundColor="#428bca">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout BackgroundColor="#428bca"
+                        Orientation="Vertical">
+                            <StackLayout Orientation="Horizontal" Padding="8">
+                                <Label Text="{Binding name}"
+                                TextColor="#fff" Font="Bold,20"/>
+                                <Label Text="{Binding price, StringFormat=\{0\} €}"
+                                HorizontalOptions="EndAndExpand"
+                                TextColor="#fff" Font="Bold,20"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 	</ContentPage.Content>
 </ContentPage>

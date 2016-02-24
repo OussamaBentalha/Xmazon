@@ -19,7 +19,7 @@ namespace Xmazon
  
 		protected override async void OnStart ()
 		{
-			AppContext.RefreshToken ();
+			await AppContext.RefreshToken ();
 		}	
 
 		public async Task<String> getAppToken(){
