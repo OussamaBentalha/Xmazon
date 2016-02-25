@@ -48,18 +48,58 @@ namespace Xmazon
 					productsList.Add(currentProduct);
 				}
 				lstView.ItemsSource = productsList;
+				lstView.ItemSelected += async (sender, e) => {
+					Product selectedProduct = (Product)e.SelectedItem;
+					OnActionSheetSimpleClicked (sender, e, selectedProduct);
+				};
+
 			}
 		}
 
+		void OpenCart (object sender, EventArgs e)
+		{
+			Navigation.PushAsync (new CartView());	
+		}
 
+		async void OnActionSheetSimpleClicked (object sender, EventArgs e, Product selectedProduct)
+		{	
+			var action = await DisplayActionSheet ("Produit: Ajouter au panier?", "Annuler", null, "Ajouter");
+			if (action == "Ajouter") {
+				Console.WriteLine ("Action: " + action);
+				addProductToCart (selectedProduct);	
+			}	
+		}
+
+		async void addProductToCart(Product selectedProduct){
+			var httpClient = new HttpClient();
+			var webservice = new Webservice ();
+			string url = "http://xmazon.appspaces.fr/cart/add";
+			string requestMethod = "PUT";
+
+
+			var headers = new Dictionary<string, string> ();
+			headers.Add ("Authorization", "Bearer " + UserContext.AccessToken);
+			httpClient = webservice.setHTTPHeaderParameters (httpClient, headers);
+
+			var bodyParameters = new Dictionary<string, string> ();
+			bodyParameters.Add ("product_uid", selectedProduct.uid);
+			bodyParameters.Add ("quantity", "1");
+			var bodyContent = webservice.getHTTPBodyWithParameters (bodyParameters);
+
+
+
+			var requestResult = await webservice.httpRequest (url, requestMethod,httpClient, bodyContent);
+
+			if (requestResult.ContainsKey ("result")) {
+				DisplayAlert ("Confirmation", "Produit ajouté.", "Fermer");
+			}
+			else {
+				DisplayAlert ("Erreur", "Produit non ajouté.", "Fermer");
+			}
+		}
+			
 		async void OnLogoutButtonClicked (object sender, EventArgs e)
 		{
-			/*
-			 * 
-			 * Webservice de déconnexion
-			 * 
-			 */ 
-			//App.IsUserLoggedIn = false;
 			Navigation.InsertPageBefore (new Connexion (), this);
 		}
 	}

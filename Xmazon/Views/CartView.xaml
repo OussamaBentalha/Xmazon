@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Xmazon.ListProducts" Title="Products" BackgroundColor="#428bca">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Xmazon.CartView" Title="Panier" BackgroundColor="#428bca">
 	<ContentPage.ToolbarItems>
+		<ToolbarItem Text="Order" Clicked="OnOrderButtonClicked" />
 		<ToolbarItem Text="Logout" Clicked="OnLogoutButtonClicked" />
-		<ToolbarItem Text="Cart" Clicked="OpenCart" />
 	</ContentPage.ToolbarItems>
 	<ContentPage.Content>
 		<ListView  x:Name="lstView" BackgroundColor="#428bca">
@@ -12,9 +12,11 @@
                         <StackLayout BackgroundColor="#428bca"
                         Orientation="Vertical">
                             <StackLayout Orientation="Horizontal" Padding="8">
-                                <Label Text="{Binding name}"
+                             <Label Text="{Binding quantity}"
                                 TextColor="#fff" Font="Bold,20"/>
-                                <Label Text="{Binding price, StringFormat=\{0\} €}"
+                                <Label Text="{Binding product.name}"
+                                TextColor="#fff" Font="Bold,20"/>
+                                <Label Text="{Binding product.price, StringFormat=\{0\} €}"
                                 HorizontalOptions="EndAndExpand"
                                 TextColor="#fff" Font="Bold,20"/>
                             </StackLayout>
