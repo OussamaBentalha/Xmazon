@@ -12,10 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Xmazon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)XmazonRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Product.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Repositories\ProductRepository.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Repositories\CategoryRepository.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Category.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Repositories\StoreRepository.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Store.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contexts\UserContext.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Contexts\AppContext.cs" />
@@ -28,7 +25,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\ListStores.xaml.cs">
       <DependentUpon>ListStores.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Models\Mockups.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\User.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\ListCategories.cs">
       <DependentUpon>ListCategories.xaml</DependentUpon>

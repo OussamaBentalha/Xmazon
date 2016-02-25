@@ -12,6 +12,7 @@ namespace Xmazon
 			InitializeComponent();
 			usernameEntry.Text = "seb7@gmail.com";
 			passwordEntry.Text = "";
+			NavigationPage.SetHasBackButton(this, false);
 		}	
 
 		async void OnSignUpButtonClicked (object sender, EventArgs e)
