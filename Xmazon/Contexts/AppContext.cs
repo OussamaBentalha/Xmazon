@@ -41,7 +41,7 @@ namespace Xmazon
 			var httpClient = new HttpClient ();
 			Webservice webservice = new Webservice ();
 			var url = "http://xmazon.appspaces.fr/oauth/token";
-			var requestMethod = Webservice.Method.POST;
+			string requestMethod = "POST";
 
 			Dictionary<string, string> bodyParameters = new Dictionary<string, string> ();
 			bodyParameters.Add ("client_id", CLIENT_ID);
@@ -56,7 +56,7 @@ namespace Xmazon
 
 			var bodyContent = webservice.getHTTPBodyWithParameters (bodyParameters);
 
-			JsonValue response = await webservice.Call (url, requestMethod,httpClient, bodyContent);
+			JsonValue response = await webservice.httpRequest (url, requestMethod,httpClient, bodyContent);
 
 			if (response==null || response.ContainsKey("code")
 				&& (int) response ["code"] >= 400

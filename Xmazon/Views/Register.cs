@@ -19,7 +19,7 @@ namespace Xmazon
 			var httpClient = new HttpClient ();
 			var webservice = new Webservice ();
 			string url = "http://xmazon.appspaces.fr/auth/subscribe";
-			var requestMethod = Webservice.Method.POST;
+			string requestMethod = "POST";
 
 
 			var headers = new Dictionary<string, string> ();
@@ -35,18 +35,11 @@ namespace Xmazon
 			bodyParameters.Add ("lastname", lastnameEntry.Text);
 			var httpBodyContent = webservice.getHTTPBodyWithParameters (bodyParameters);
 
-			var requestResult = await webservice.Call (url, requestMethod, httpClient, httpBodyContent);
+			var requestResult = await webservice.httpRequest (url, requestMethod, httpClient, httpBodyContent);
 
 			if (requestResult.ContainsKey ("result")) {
 				var rootPage = Navigation.NavigationStack [0];
 				if (rootPage != null) {
-					/*
-			 		* 
-			 		* Webservice d'inscription
-					* 
-			 		*/ 
-					//	Mockups.user = user;
-					//App.IsUserLoggedIn = true;
 					Navigation.InsertPageBefore (new ListStores (), Navigation.NavigationStack [0]);
 					await Navigation.PopToRootAsync ();
 				}

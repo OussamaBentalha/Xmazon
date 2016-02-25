@@ -25,7 +25,7 @@ namespace Xmazon
 			var httpClient = new HttpClient();
 			var webservice = new Webservice ();
 			string url = "http://xmazon.appspaces.fr/category/list";
-			var requestMethod = Webservice.Method.GET;
+			string requestMethod = "GET";
 
 			var requestObject = new Webservice ();
 
@@ -42,7 +42,7 @@ namespace Xmazon
 			var bodyContent = webservice.getHTTPBodyWithParameters(null);
 
 				
-			var requestResult = await requestObject.Call (url, requestMethod, httpClient, bodyContent);
+			var requestResult = await requestObject.httpRequest (url, requestMethod, httpClient, bodyContent);
 
 			if (requestResult.ContainsKey ("result")) {
 				var jsonCategoriesList = requestResult ["result"];

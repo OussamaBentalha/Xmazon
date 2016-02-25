@@ -38,7 +38,7 @@ namespace Xmazon
 			var httpClient = new HttpClient();
 			var webservice = new Webservice ();
 			var url = "http://xmazon.appspaces.fr/oauth/token"; 
-			var requestMethod = Webservice.Method.POST;
+			string requestMethod = "POST";
 
 			Dictionary<string, string> bodyParameters = new Dictionary<string, string> ();
 			bodyParameters.Add ("grant_type", "password");
@@ -49,7 +49,7 @@ namespace Xmazon
 
 			var bodyContent = webservice.getHTTPBodyWithParameters (bodyParameters);
 		
-			JsonValue jsonToken = await webservice.Call (url, requestMethod, httpClient, bodyContent);
+			JsonValue jsonToken = await webservice.httpRequest (url, requestMethod, httpClient, bodyContent);
 			if (jsonToken != null) {
 				Properties [ACCESS_TOKEN] = (string)jsonToken [ACCESS_TOKEN];
 				Properties [REFRESH_TOKEN] = (string)jsonToken [REFRESH_TOKEN];
@@ -65,7 +65,7 @@ namespace Xmazon
 			var httpClient = new HttpClient ();
 			Webservice webservice = new Webservice ();
 			var url = "http://xmazon.appspaces.fr/oauth/token"; 
-			var requestMethod = Webservice.Method.POST;
+			string requestMethod = "POST";
 
 			Dictionary<string, string> bodyParameters = new Dictionary<string, string> ();
 			bodyParameters.Add ("grant_type", "refresh_token");
@@ -74,7 +74,7 @@ namespace Xmazon
 			bodyParameters.Add ("refresh_token", Properties [REFRESH_TOKEN] as string);
 			var bodyContent = webservice.getHTTPBodyWithParameters (bodyParameters);
 
-			JsonValue response = await webservice.Call (url, requestMethod, httpClient, bodyContent);
+			JsonValue response = await webservice.httpRequest (url, requestMethod, httpClient, bodyContent);
 
 			if (response.ContainsKey("code") && (int) response ["code"] < 400) {
 				Properties [ACCESS_TOKEN] = (string) response [ACCESS_TOKEN];

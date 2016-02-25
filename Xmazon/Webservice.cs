@@ -13,52 +13,24 @@ namespace Xmazon
 {
 	public class Webservice
 	{
-		public enum Method {
-			GET,
-			POST,
-			PUT,
-			DELETE
-		};
-
-		// ENDPOINT
-		public const string SERVER_ENDPOINT = "http://xmazon.appspaces.fr";
-
-		// RESOURCES
-		public const string OAUTH_RESOURCE = SERVER_ENDPOINT + "/oauth";
-		public const string AUTH_RESOURCE = SERVER_ENDPOINT + "/auth";
-		public const string STORE_RESOURCE = SERVER_ENDPOINT + "/store";
-		public const string CATEGORY_RESOURCE = SERVER_ENDPOINT + "/category";
-		public const string PRODUCT_RESOURCE = SERVER_ENDPOINT + "/product";
-
-		// WEB SERVICES
-		public const string OAUTH_TOKEN = OAUTH_RESOURCE + "/token";
-
-		public const string AUTH_SUBSCRIBE = AUTH_RESOURCE + "/subscribe";
-
-		public const string STORE_LIST = STORE_RESOURCE + "/list";
-
-		public const string CATEGORY_LIST = CATEGORY_RESOURCE + "/list";
-
-		public const string PRODUCT_LIST = PRODUCT_RESOURCE + "/list";
-
 
 		public Webservice (){}
 
-		public async Task<JsonValue> Call(string url, Method method, HttpClient httpClient, FormUrlEncodedContent bodyContent) 
+		public async Task<JsonValue> httpRequest(string url, string method, HttpClient httpClient, FormUrlEncodedContent bodyContent) 
 		{
 			HttpResponseMessage response = null;
 							
 			switch (method) {
-			case Method.GET:
+			case "GET":
 				response = await httpClient.GetAsync (url);
 				break;
-			case Method.POST:
+			case "POST":
 				response = await httpClient.PostAsync (url, bodyContent);
 				break;
-			case Method.PUT:
+			case "PUT":
 				response = await httpClient.PutAsync (url, bodyContent);
 				break;
-			case Method.DELETE:
+			case "DELETE":
 				response = await httpClient.DeleteAsync (url);
 				break;
 			}
@@ -72,10 +44,11 @@ namespace Xmazon
 				await UserContext.RefreshToken ();
 
 				if (UserContext.AccessToken == null) {
+					//TODO : go connexion page + message
 					throw new UnauthorizedAccessException ("User token expired, need to re-connect.");
 				}
 
-				return await Call(url, method, httpClient, bodyContent);
+				return await httpRequest(url, method, httpClient, bodyContent);
 			}
 
 			if (response.StatusCode >= HttpStatusCode.BadRequest) {
