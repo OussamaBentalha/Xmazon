@@ -10,45 +10,36 @@ namespace Xmazon
 		public Connexion ()
 		{
 			InitializeComponent();
-			usernameEntry.Text = "seb7@gmail.com";
-			passwordEntry.Text = "";
+			mailEntry.Text = "seb7@gmail.com";
 			NavigationPage.SetHasBackButton(this, false);
 		}	
 
 		async void OnSignUpButtonClicked (object sender, EventArgs e)
 		{
-			//TODO launch Register()
 			await Navigation.PushAsync (new Register());
 		}
 
 		async void OnLoginButtonClicked (object sender, EventArgs e)
 		{
-			
-			var result = await UserContext.Authenticate (usernameEntry.Text, passwordEntry.Text);
+			var result = await UserContext.Authenticate (mailEntry.Text, passwordEntry.Text);
 			if (result != null){
-				Console.WriteLine ("Connexion reussie : " + result["access_token"]);
-				messageLabel.Text = "";
-				passwordEntry.Text = "";
-				Navigation.PushAsync (new ListStores ());
-				
-			} else {
-				passwordEntry.Text = "";
-				messageLabel.Text = "Pseudo/mot de passe incorrect.";
+				onConnexionSuccess ();
+			} 
+			else {
+				onConnexionFailed ();
 			}
 		}
 
-		bool AreCredentialsCorrect (User user)
-		{
-			/*
-			 * 
-			 * Webservice de connexion
-			 * 
-			 */ 
-			return true; 
-			//if(Mockups.user != null) return user.Username == Mockups.user.Username && user.Password == Mockups.user.Password;
-			//return false;
+		void onConnexionSuccess(){
+			messageLabel.Text = "";
+			passwordEntry.Text = "";
+			Navigation.PushAsync (new ListStores ());
 		}
 
+		void onConnexionFailed(){
+			passwordEntry.Text = "";
+			messageLabel.Text = "Pseudo/mot de passe incorrect.";
+		}
 	}
 }
 

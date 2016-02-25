@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Json;
 using System.Threading.Tasks;
 using System.Net;
+using System.Net.Http;
 
 namespace Xmazon
 {
@@ -37,21 +38,25 @@ namespace Xmazon
 
 		public static async Task<JsonValue> RefreshToken()
 		{
-			XmazonRequest xmazon = new XmazonRequest ();
+			var httpClient = new HttpClient ();
+			Webservice webservice = new Webservice ();
+			var url = "http://xmazon.appspaces.fr/oauth/token";
+			var requestMethod = Webservice.Method.POST;
 
-			Dictionary<string, string> postParameters = new Dictionary<string, string> ();
-			postParameters.Add ("client_id", CLIENT_ID);
-			postParameters.Add ("client_secret", CLIENT_SECRET);
+			Dictionary<string, string> bodyParameters = new Dictionary<string, string> ();
+			bodyParameters.Add ("client_id", CLIENT_ID);
+			bodyParameters.Add ("client_secret", CLIENT_SECRET);
 
 			if (Properties.ContainsKey(REFRESH_TOKEN)) {
-				postParameters.Add ("grant_type", "refresh_token");
-				postParameters.Add ("refresh_token", Properties [REFRESH_TOKEN] as string);
+				bodyParameters.Add ("grant_type", "refresh_token");
+				bodyParameters.Add ("refresh_token", Properties [REFRESH_TOKEN] as string);
 			} else {
-				postParameters.Add ("grant_type", "client_credentials");
+				bodyParameters.Add ("grant_type", "client_credentials");
 			}
 
-			JsonValue response = await xmazon.Call (XmazonRequest.OAUTH_TOKEN, XmazonRequest.Method.POST,
-				null, postParameters, null);
+			var bodyContent = webservice.getHTTPBodyWithParameters (bodyParameters);
+
+			JsonValue response = await webservice.Call (url, requestMethod,httpClient, bodyContent);
 
 			if (response==null || response.ContainsKey("code")
 				&& (int) response ["code"] >= 400

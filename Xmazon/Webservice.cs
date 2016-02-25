@@ -11,7 +11,7 @@ using System.Net.Http.Headers;
 
 namespace Xmazon
 {
-	public class XmazonRequest
+	public class Webservice
 	{
 		public enum Method {
 			GET,
@@ -41,34 +41,25 @@ namespace Xmazon
 
 		public const string PRODUCT_LIST = PRODUCT_RESOURCE + "/list";
 
-		private HttpClient httpClient;
 
-		public XmazonRequest ()
+		public Webservice (){}
+
+		public async Task<JsonValue> Call(string url, Method method, HttpClient httpClient, FormUrlEncodedContent bodyContent) 
 		{
-			httpClient = new HttpClient ();
-		}
-
-		public async Task<JsonValue> Call(string url, Method method, 
-			Dictionary<string, string> getParams, Dictionary<string, string> postParams, Dictionary<string, string> headers) 
-		{
-			string encodedUrl = GetUrlEncoded (url, getParams);
-
 			HttpResponseMessage response = null;
-
-			SetHeaders (headers);
-				
+							
 			switch (method) {
 			case Method.GET:
-				response = await httpClient.GetAsync (encodedUrl);
+				response = await httpClient.GetAsync (url);
 				break;
 			case Method.POST:
-				response = await httpClient.PostAsync (encodedUrl, GetUrlEncodedBody (postParams));
+				response = await httpClient.PostAsync (url, bodyContent);
 				break;
 			case Method.PUT:
-				response = await httpClient.PutAsync (encodedUrl, GetUrlEncodedBody (postParams));
+				response = await httpClient.PutAsync (url, bodyContent);
 				break;
 			case Method.DELETE:
-				response = await httpClient.DeleteAsync (encodedUrl);
+				response = await httpClient.DeleteAsync (url);
 				break;
 			}
 
@@ -84,7 +75,7 @@ namespace Xmazon
 					throw new UnauthorizedAccessException ("User token expired, need to re-connect.");
 				}
 
-				return await Call(url, method, getParams, postParams, headers);
+				return await Call(url, method, httpClient, bodyContent);
 			}
 
 			if (response.StatusCode >= HttpStatusCode.BadRequest) {
@@ -95,42 +86,43 @@ namespace Xmazon
 		}
 
 
-		private string GetUrlEncoded(string url, Dictionary<string, string> getParams)
+		public string encodeUrl(string url, Dictionary<string, string> urlParameters)
 		{
-			if (getParams == null) {
+			if (urlParameters == null) {
 				return url;
 			}
 				
-			string getParamsEncoded = string.Join(
+			string encodedUrl = string.Join(
 				"&", 
-				getParams.Select(param => { 
+				urlParameters.Select(param => { 
 					return (param.Value != null) ? param.Key + "=" + Uri.EscapeDataString(param.Value) : "";
 				})
 			);
 
-			return url + (string.IsNullOrEmpty(getParamsEncoded) ? "" : "?" + getParamsEncoded);
+			return url + (string.IsNullOrEmpty(encodedUrl) ? "" : "?" + encodedUrl);
 		}
 
 
-		private FormUrlEncodedContent GetUrlEncodedBody(Dictionary<string, string> postParams) 
+		public FormUrlEncodedContent getHTTPBodyWithParameters(Dictionary<string, string> bodyParameters) 
 		{
-			if (postParams == null) {
+			if (bodyParameters == null) {
 				return null;
 			}
 
-			return new FormUrlEncodedContent (postParams);
+			return new FormUrlEncodedContent (bodyParameters);
 		}
 
 
-		private void SetHeaders(Dictionary<string, string> headers)
+		public HttpClient setHTTPHeaderParameters(HttpClient httpClient, Dictionary<string, string> headers)
 		{
 			if (headers == null) {
-				return;
+				return null;
 			}
 
 			foreach (string headerKey in headers.Keys) {
 				httpClient.DefaultRequestHeaders.TryAddWithoutValidation(headerKey, headers[headerKey]);
 			}
+			return httpClient;
 		}
 	}
 }

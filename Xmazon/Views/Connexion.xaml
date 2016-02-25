@@ -6,13 +6,16 @@
 	<ContentPage.Content>
 		<StackLayout VerticalOptions="StartAndExpand"  Padding="50" >
 			<Label Text="Xmazon" TextColor="White" FontSize="35" XAlign="Center"/>
-			<Label Text="Username" TextColor="White"/>
-			<Entry x:Name="usernameEntry" Placeholder="username" />
+
+			<Label Text="Adresse mail" TextColor="White"/>
+			<Entry x:Name="mailEntry"/>
+
 			<Label Text="Password" TextColor="White"/>
 			<Entry x:Name="passwordEntry" IsPassword="true" />
-			<Label x:Name="messageLabel" TextColor="White" Font="15"/>
-			<Button Text="Login" Clicked="OnLoginButtonClicked" BackgroundColor="White" BorderRadius="22" />
 
+			<Label x:Name="messageLabel" TextColor="White" Font="15"/>
+
+			<Button Text="Login" Clicked="OnLoginButtonClicked" BackgroundColor="White" BorderRadius="22" />
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

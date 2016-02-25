@@ -10,7 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Xmazon.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)XmazonRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Product.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Category.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Store.cs" />
@@ -32,6 +31,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\ListProducts.cs">
       <DependentUpon>ListProducts.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Webservice.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Repositories\" />

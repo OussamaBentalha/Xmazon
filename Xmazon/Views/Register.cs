@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 
 using Xamarin.Forms;
 
@@ -15,24 +16,26 @@ namespace Xmazon
 
 		async void OnSignUpButtonClicked (object sender, EventArgs e)
 		{
+			var httpClient = new HttpClient ();
+			var webservice = new Webservice ();
+			string url = "http://xmazon.appspaces.fr/auth/subscribe";
+			var requestMethod = Webservice.Method.POST;
 
-			string url = XmazonRequest.AUTH_SUBSCRIBE;
-			var method = XmazonRequest.Method.POST;
-
-			var requestObject = new XmazonRequest ();
 
 			var headers = new Dictionary<string, string> ();
 			headers.Add ("Authorization", "Bearer " + AppContext.AccessToken);
+			httpClient = webservice.setHTTPHeaderParameters (httpClient, headers);
 
 
-			var postParams = new Dictionary<string, string> ();
-			postParams.Add ("username", usernameEntry.Text);
-			postParams.Add ("password", passwordEntry.Text);
-			postParams.Add ("email", emailEntry.Text);
-			postParams.Add ("firstname", firstnameEntry.Text);
-			postParams.Add ("lastname", lastnameEntry.Text);
+			var bodyParameters = new Dictionary<string, string> ();
+			bodyParameters.Add ("username", usernameEntry.Text);
+			bodyParameters.Add ("password", passwordEntry.Text);
+			bodyParameters.Add ("email", emailEntry.Text);
+			bodyParameters.Add ("firstname", firstnameEntry.Text);
+			bodyParameters.Add ("lastname", lastnameEntry.Text);
+			var httpBodyContent = webservice.getHTTPBodyWithParameters (bodyParameters);
 
-			var requestResult = await requestObject.Call (url, method, null, postParams, headers);
+			var requestResult = await webservice.Call (url, requestMethod, httpClient, httpBodyContent);
 
 			if (requestResult.ContainsKey ("result")) {
 				var rootPage = Navigation.NavigationStack [0];

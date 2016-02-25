@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Json;
 using Xamarin.Forms;
 using System.Collections;
+using System.Net.Http;
 
 namespace Xmazon
 {
@@ -19,20 +20,26 @@ namespace Xmazon
 		}
 
 		private async void initializeProductsList(){
+			
+			var httpClient = new HttpClient();
+			var webservice = new Webservice ();
+			string url = "http://xmazon.appspaces.fr/product/list";
+			var requestMethod = Webservice.Method.GET;
 
-			string url = XmazonRequest.PRODUCT_LIST;
-			var method = XmazonRequest.Method.GET;
-
-			var requestObject = new XmazonRequest ();
 
 			var headers = new Dictionary<string, string> ();
 			headers.Add ("Authorization", "Bearer " + UserContext.AccessToken);
+			httpClient = webservice.setHTTPHeaderParameters (httpClient, headers);
 
 
-			var getParams = new Dictionary<string, string> ();
-			getParams.Add ("category_uid", selectedCategory.uid);
+			var urlParameters = new Dictionary<string, string> ();
+			urlParameters.Add ("category_uid", selectedCategory.uid);
+			url = webservice.encodeUrl(url, urlParameters);
 
-			var requestResult = await requestObject.Call (url, method, getParams, null, headers);
+			var bodyContent = webservice.getHTTPBodyWithParameters(null);
+
+
+			var requestResult = await webservice.Call (url, requestMethod,httpClient, bodyContent);
 
 			if (requestResult.ContainsKey ("result")) {
 				var jsonProductsList = requestResult ["result"];
